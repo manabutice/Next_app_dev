@@ -1,0 +1,26 @@
+services:
+  web:
+    build:
+      context: .
+    tty: true
+    volumes:
+      - .:/app
+    environment:
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
+    command: sh -c "npm run dev"
+    ports:
+      - 4000:3000
+    networks:
+      - ghouse_network
+    env_file:
+      - .env.local
+  # openapi-generator:
+  #   image: openapitools/openapi-generator-cli:v7.0.0
+  #   volumes:
+  #     - .:/local
+  #   command: sh -c "/usr/local/bin/docker-entrypoint.sh generate -i local/georgian_house/web_openapi.yaml -g typescript-axios -o local/client/web_api"
+
+networks:
+  ghouse_network:
+    external: true
