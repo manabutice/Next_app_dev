@@ -1,6 +1,26 @@
 import * as cheerio from "cheerio";
 
-// サーバーコンポーネントとして定義
+// ヘッダーコンポーネント
+function Header() {
+  return (
+    <header className="bg-blue-600 text-white py-4 shadow-md">
+      <div className="max-w-4xl mx-auto flex justify-between items-center px-4">
+        {/* ロゴ */}
+        <h1 className="text-xl font-bold">不動産情報</h1>
+        {/* ナビゲーション */}
+        <nav>
+          <ul className="flex space-x-4">
+            <li><a href="#" className="hover:underline">ホーム</a></li>
+            <li><a href="#" className="hover:underline">サービス</a></li>
+            <li><a href="#" className="hover:underline">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+// メインコンテンツ（サーバーコンポーネント）
 export default async function Home() {
   // エジプト不動産のページから HTML を取得
   const res = await fetch("https://beograd-consulting.com/real-estate/egypt/");
@@ -11,8 +31,11 @@ export default async function Home() {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
+      {/* ヘッダー */}
+      <Header />
+
       {/* 見出し */}
-      <h1 className="text-3xl font-bold bg-blue-200 p-4 rounded-md text-center">
+      <h1 className="text-3xl font-bold bg-blue-200 p-4 rounded-md text-center mt-6">
         エジプト不動産の魅力と経済発展
       </h1>
 
