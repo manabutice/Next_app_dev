@@ -1,24 +1,5 @@
 import * as cheerio from "cheerio";
-
-// ヘッダーコンポーネント
-function Header() {
-  return (
-    <header className="bg-blue-600 text-white py-4 shadow-md">
-      <div className="max-w-4xl mx-auto flex justify-between items-center px-4">
-        {/* ロゴ */}
-        <h1 className="text-xl font-bold">不動産情報</h1>
-        {/* ナビゲーション */}
-        <nav>
-          <ul className="flex space-x-4">
-            <li><a href="#" className="hover:underline">ホーム</a></li>
-            <li><a href="#" className="hover:underline">サービス</a></li>
-            <li><a href="#" className="hover:underline">お問い合わせ</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-  );
-}
+import Header from "./_components/Header"; // ✅ `_components` からインポート
 
 // メインコンテンツ（サーバーコンポーネント）
 export default async function Home() {
@@ -30,7 +11,7 @@ export default async function Home() {
   const $ = cheerio.load(html);
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className="max-w-3xl mx-auto">
       {/* ヘッダー */}
       <Header />
 
