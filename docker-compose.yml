@@ -15,12 +15,36 @@ services:
       - ghouse_network
     env_file:
       - .env.local
-  # openapi-generator:
-  #   image: openapitools/openapi-generator-cli:v7.0.0
-  #   volumes:
-  #     - .:/local
-  #   command: sh -c "/usr/local/bin/docker-entrypoint.sh generate -i local/georgian_house/web_openapi.yaml -g typescript-axios -o local/client/web_api"
+
+  api:  # ✅ API サービス追加
+    build:
+      context: ./api
+    ports:
+      - 3001:3000
+    volumes:
+      - ./api:/app
+    depends_on:
+      - db
+    networks:
+      - ghouse_network
+    env_file:
+      - ./api/.env.local
+
+  db:  # ✅ データベース追加（例: PostgreSQL）
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: myapp
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - ghouse_network
 
 networks:
   ghouse_network:
     external: true
+
+volumes:
+  db_data:

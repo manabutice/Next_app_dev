@@ -1,4 +1,4 @@
-import { fetchUser } from "../utils/fetchUser";
+import { fetchUser } from "@/app/utils/fetchUser";
 
 export default async function UserDetail({ userId }: { userId: string }) {
   const user = await fetchUser(userId);
